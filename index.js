@@ -11,57 +11,26 @@
 // update automatically if there's a stop date
 
 
-function calculate(startDate, stopDate, existingTime) {
-  existingTime = existingTime || 0;
-  timeAdded = stopDate - startDate;
-  return existingTime + timeAdded;
-}
-
 // dates
 //   date
 //     moment.format()
 //     start/continue/end
 // calculation happens only on stop or calculate (as of today)
 
-// logic: loop through dates
-//        if labeled start, create a start date
-//        if find a stop, create an end date, calculate time
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~120 effective lines of JavaScript.
 
 // localStorage persistence
 var STORAGE_KEY = '3030calculator-v0.1'
-var dateStorage = {
-  fetch: function () {
-    var dates = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    dates.forEach(function (date, index) {
-      date.id = index
-    })
-    dateStorage.uid = dates.length
-    return dates
-  },
-  save: function (dates) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dates))
-  }
-}
 
 // app Vue instance
 var app = new Vue({
   // app initial state
   data: {
-    dates: dateStorage.fetch(),
+    dates: [],
+    currentDate: '',
     newDate: '',
     editedDate: null
-  },
-
-  // watch dates change for localStorage persistence
-  watch: {
-    dates: {
-      handler: function (dates) {
-        dateStorage.save(dates)
-      },
-      deep: true
-    }
   },
 
   // computed properties
@@ -106,6 +75,11 @@ var app = new Vue({
         dateType: dateType
       })
       this.newDate = ''
+    },
+    calculateTime: function() {
+      var existingTime = existingTime || 0;
+      var timeAdded = this.diff(stopDate);
+      return existingTime + timeAdded;
     }
   }
   //, 

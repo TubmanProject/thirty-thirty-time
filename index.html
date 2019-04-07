@@ -38,14 +38,16 @@
                 :key="date.id"
             >
               <div class="form-group d-flex justify-content-between w-100">
-                <div class="col-6">{{date.date}}</div>
-                <button class="btn btn-primary mr-1" type="submit">COR Filed</button>
+                <div class="col-6">{{date.CORDate.format("M/D/YY")}} to {{date.NCDDate.format("M/D/YY")}}</div>
               </div>
             </li>
             <li class="list-group-item flex-column align-items-start">
               <!--<h4 class="text-muted">Date</h4>-->
               <div class="form-group d-flex justify-content-between w-100">
-                <input type="date" class="form-control form-control-lg mr-4" id="dateOfIssue" required v-model="newDate">
+                <label for="dateOfIssue" class="col-form-label">Date of COR:</label>
+                <input type="date" class="form-control form-control-lg mr-4" id="dateOfIssue" required v-model="inputDate.CORDate">
+                <label for="nextCourtDate" class="col-form-label">Next Court Date:</label>
+                <input type="date" class="form-control form-control-lg mr-4" id="nextCourtDate" required v-model="inputDate.NCDDate">
                 <div class="invalid-feedback">
                   Date is required.
                 </div>

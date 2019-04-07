@@ -28,9 +28,14 @@ var app = new Vue({
   // app initial state
   data: {
     dates: [],
-    currentDate: '',
-    newDate: '',
-    editedDate: null
+    inputDate: {
+      CORDate: '',
+      NCDDate: ''
+    },
+    newDate: {
+      CORDate: '',
+      NCDDate: ''
+    }
   },
 
   // computed properties
@@ -63,24 +68,26 @@ var app = new Vue({
   // methods that implement data logic.
   // note there's no DOM manipulation here at all.
   methods: {
+    // Calculate this instance
+    calculateTime: function(cor, ncd) {
+      console.log(moment(ncd).diff(moment(cor)))
+    },
+    // Persist COR date
     addDate: function () {
-      var value = this.newDate
-      var dateType = this.buttonClass
-      if (!value) {
+      var corDate = this.inputDate.CORDate
+      var ncdDate = this.inputDate.NCDDate
+      if (!corDate | !ncdDate) {
         return
       }
       this.dates.push({
-        id: dateStorage.uid++,
-        date: moment().format(value),
-        dateType: dateType
+        CORDate: moment(corDate),
+        NCDDate: moment(ncdDate),
+        timeElapsed: this.calculateTime(corDate, ncdDate)
       })
-      this.newDate = ''
-    },
-    calculateTime: function() {
-      var existingTime = existingTime || 0;
-      var timeAdded = this.diff(stopDate);
-      return existingTime + timeAdded;
+      this.inputDate.CORDate = ''
+      this.inputDate.NCDDate = ''
     }
+    // Calculate full time
   }
   //, 
   // a custom directive to wait for the DOM to be updated

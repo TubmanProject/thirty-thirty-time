@@ -26,6 +26,10 @@
         <!-- Calculator Result -->
         <div class="col-md-3 order-md-2 ml-4 mr-4">
             <h4 class="d-flex justify-content-between align-items-center">
+              <span class="text-muted">Delays</span>
+              <span class="badge-xxl badge-secondary badge-pill">{{numberDelays}}</span>
+            </h4>
+            <h4 class="d-flex justify-content-between align-items-center">
               <span class="text-muted">Days</span>
               <span class="badge-xxl badge-secondary badge-pill">{{totalTimeLost}}</span>
             </h4>
@@ -45,10 +49,14 @@
             <li class="list-group-item flex-column align-items-start">
               <!--<h4 class="text-muted">Date</h4>-->
               <div class="form-group d-flex justify-content-between w-100">
-                <label for="dateOfIssue" class="col-form-label">Date of COR:</label>
-                <input type="date" class="form-control form-control-lg mr-4" id="dateOfIssue" required v-model="inputDate.CORDate">
-                <label for="nextCourtDate" class="col-form-label">Next Court Date:</label>
-                <input type="date" class="form-control form-control-lg mr-4" id="nextCourtDate" required v-model="inputDate.NCDDate">
+                <div class="col-5">
+                  <label for="dateOfIssue" class="col-form-label">Date COR Received:</label><br />
+                  <input type="date" class="form-control form-control-sm mr-4" id="dateOfIssue" required v-model="inputDate.CORDate">
+                </div>
+                <div class="col-5">
+                  <label for="nextCourtDate" class="col-form-label">Next Court Date:</label><br />
+                  <input type="date" class="form-control form-control-sm mr-4" id="nextCourtDate" required v-model="inputDate.NCDDate">
+                </div>
                 <div class="invalid-feedback">
                   Date is required.
                 </div>

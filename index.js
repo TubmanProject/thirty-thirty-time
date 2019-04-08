@@ -34,7 +34,19 @@ var app = new Vue({
 
   // computed properties
   // http://vuejs.org/guide/computed.html
-  //computed: {
+  computed: {
+    numberDelays: function() {
+      return this.dates.length
+    },
+    totalTimeLost: function() {
+      console.log('total')
+      var totalTime = 0
+      for (var i = 0; i < this.dates.length; i++) {
+        console.log(this.dates[i])
+        totalTime += this.dates[i].timeElapsed
+      }
+      return totalTime
+    }
     //filteredTodos: function () {
       //return filters[this.visibility](this.todos)
     //},
@@ -51,7 +63,7 @@ var app = new Vue({
         //})
       //}
     //}
-  //},
+  },
 
   filters: {
     pluralize: function (n) {

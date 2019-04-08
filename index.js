@@ -11,12 +11,6 @@
 // update automatically if there's a stop date
 
 
-// dates
-//   date
-//     moment.format()
-//     start/continue/end
-// calculation happens only on stop or calculate (as of today)
-
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~120 effective lines of JavaScript.
 
@@ -69,9 +63,6 @@ var app = new Vue({
   // note there's no DOM manipulation here at all.
   methods: {
     // Calculate this instance
-    calculateTime: function(cor, ncd) {
-      console.log(moment(ncd).diff(moment(cor)))
-    },
     // Persist COR date
     addDate: function () {
       var corDate = this.inputDate.CORDate
@@ -82,10 +73,10 @@ var app = new Vue({
       this.dates.push({
         CORDate: moment(corDate),
         NCDDate: moment(ncdDate),
-        timeElapsed: this.calculateTime(corDate, ncdDate)
+        timeElapsed: moment(ncdDate).diff(moment(corDate), 'days')
       })
-      this.inputDate.CORDate = ''
-      this.inputDate.NCDDate = ''
+      this.inputDate.CORDate = this.newDate.CORDate
+      this.inputDate.NCDDate = this.newDate.NCDDate
     }
     // Calculate full time
   }
